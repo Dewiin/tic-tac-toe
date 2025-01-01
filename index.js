@@ -42,7 +42,7 @@ const createUser = (name, player) => {
     
 }
 
-const initializeGame = (function() {
+const playGame = (function() {
     const createPlayers = (nameOne, nameTwo) => {
         const userOne = createUser(nameOne, 1);
         const userTwo = createUser(nameTwo, 2);
@@ -80,7 +80,7 @@ const initializeGame = (function() {
 
             if(Array.isArray(win)) {
                 win[1].forEach((index) => {
-                    boardField[index].style.backgroundColor = "#d64933";
+                    boardField[index].style.backgroundColor = "rgba(214, 73, 51, 0.7)";
                 });
             }
 
@@ -110,31 +110,57 @@ const initializeGame = (function() {
         })
     }
 
-    return {play, checkWin, reset, createPlayers};
+    const restartScore = () => {
+        playerOne.children[1].textContent = 0;
+        playerTwo.children[1].textContent = 0;
+    }
+
+    return {play, checkWin, reset, createPlayers, restartScore};
 })();
 
 
 const playerOne = document.querySelector(".player-one-score");
 const playerTwo = document.querySelector(".player-two-score");
 const boardField = document.querySelectorAll(".board-field");
-initializeGame.createPlayers("Me", "You");
+playGame.createPlayers("Me", "You");
 boardField.forEach((field, index) => {
     field.addEventListener("click", () => {
         if(playerOne.classList.contains("active")) {
-            if(initializeGame.play("X", index)) {
+            if(playGame.play("X", index)) {
                 playerOne.classList.toggle("active");
                 playerTwo.classList.toggle("active");
             }
         }
         else {
-            if(initializeGame.play("O", index)) {
+            if(playGame.play("O", index)) {
                 playerOne.classList.toggle("active");
                 playerTwo.classList.toggle("active");
             }
         }
 
-        if(initializeGame.checkWin()) {
-            initializeGame.createPlayers("Me", "You");
+        if(playGame.checkWin()) {
+            playGame.createPlayers("Me", "You");
+            nextRound.classList.toggle("active");
         }       
+    });
+});
+
+
+const restart = document.querySelector(".gameActions > button:first-child");
+restart.addEventListener("click", () => {
+    nextRound.classList.remove("active");   
+    playGame.reset();
+    playGame.restartScore();
+    boardField.forEach((field) => {
+        field.style.pointerEvents = "auto";
+    });
+});
+
+const nextRound = document.querySelector(".gameActions > button:last-child");
+nextRound.addEventListener("click", () => {
+    nextRound.classList.toggle("active")
+    playGame.reset();
+    boardField.forEach((field) => {
+        field.style.pointerEvents = "auto";
     });
 });

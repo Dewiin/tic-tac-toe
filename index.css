@@ -8,6 +8,8 @@
     --field-shadow: rgb(40, 40, 40);
     --player-one-font-color: rgb(139, 166, 100);
     --player-two-font-color: rgb(62, 105, 144);
+    --game-actions-button-color: rgb(125, 132, 145);
+    --game-actions-font-color: rgb(234, 240, 206);
 }
 
 * {
@@ -15,10 +17,17 @@
 }
 
 body {
-    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
+    background-color: var(--background-color);
+}
+
+/* Game Board */
+.content {
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,6 +64,7 @@ body {
 /* Player Scores */
 .player-one-score, .player-two-score {
     text-align: center;
+    width: 100px;
 }
 
 .player-one-score {
@@ -68,4 +78,33 @@ body {
 .player-one-score.active, .player-two-score.active {
     text-shadow: 0 0 50px;
     transition-duration: 200ms;
+}
+
+/* Game Actions */
+.gameActions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.gameActions > button {
+    color: var(--game-actions-font-color);
+    background-color: var(--game-actions-button-color);
+    width: 10rem;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 5px 10px var(--board-color);
+}
+.gameActions > button:hover {
+    transform: scale(1.1);
+    transition-duration: 200ms;
+}
+
+.gameActions > button:last-child {
+    display: none;
+}
+.gameActions > button:last-child.active {
+    display: block;
 }
