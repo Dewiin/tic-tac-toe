@@ -28,9 +28,6 @@ body {
 /* Game Board */
 .content {
     height: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 120px;
 }
 
@@ -38,7 +35,7 @@ body {
     aspect-ratio: 1 / 1;
     width: var(--board-size);
     min-width: 350px;
-    /* margin: auto; */
+    margin: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -62,9 +59,15 @@ body {
 
 
 /* Player Scores */
+.player-scores {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
 .player-one-score, .player-two-score {
     text-align: center;
-    width: 100px;
+    width: fit-content;
 }
 
 .player-one-score {
@@ -75,7 +78,7 @@ body {
     color: var(--player-two-font-color);
 }
 
-.player-one-score.active, .player-two-score.active {
+.player-one-score.winRound, .player-two-score.winRound {
     text-shadow: 0 0 50px;
     transition-duration: 200ms;
 }
@@ -107,4 +110,58 @@ body {
 }
 .gameActions > button:last-child.active {
     display: block;
+}
+
+/* Modal */
+.modal {
+    display: block;
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--background-color);
+    opacity: 0.95;
+    align-content: center;
+}
+
+.modal-content {
+    margin: auto;
+    width: 30vw;
+    height: 50vh;
+    min-width: 420px;
+    min-height: 420px;
+    background-color: var(--field-shadow);
+    align-content: center;
+    border-radius: 40px;
+}
+.modal-content > * {
+    color: white;
+    width: fit-content;
+    margin: auto;
+    align-content: center;
+}
+.modal-content > form > * {
+    display: flex;
+    margin: 3rem 0;
+    justify-content: center;
+}
+.modal-content > form > div > input {
+    color: white;
+    padding: 0 2rem;
+    border-radius: 20px;
+    background-color: rgb(0,0,0,0);
+}
+.modal-content > form button:last-child {
+    border: none;
+    background-color: rgb(0,0,0,0);
+    color: white;
+    margin: auto;
+}
+
+.modal-content > form button:last-child:hover {
+    transform: scale(1.2);
+    transition-duration: 200ms;
+    cursor: pointer;
+    color: var(--game-actions-button-color);
 }

@@ -8,10 +8,32 @@
     <script src="index.js" defer></script>
 </head>
 <body>
+    <div class="modal">
+        <div class="modal-content">
+            <h3>Choose your names</h3>
+            <form>
+                <div class="input">
+                    <img style="height: 4rem" src="assets/alpha-x.svg">
+                    <input type="text" placeholder="Player 1" id="name-one" maxlength="10" required>
+                </div>
+                <div class="input">
+                    <img style="height: 4rem" src="assets/alpha-o.svg">
+                    <input type="text" placeholder="Player 2" id="name-two" maxlength="10" required>
+                </div>
+                <button type="submit">Start Game</button>
+            </form>
+        </div>
+    </div>
     <div class="content">
-        <div class="player-one-score active">
-            <h1>Player 1</h1>
-            <h1 class="score">0</h1>
+        <div class="player-scores">
+            <div class="player-one-score active">
+                <h1></h1>
+                <h1 class="score">0</h1>
+            </div>
+            <div class="player-two-score">
+                <h1></h1>
+                <h1 class="score">0</h1>
+            </div>
         </div>
         <div id="game-board">
             <div class="board-field" data-index="0"></div>
@@ -25,10 +47,6 @@
             <div class="board-field" data-index="6"></div>
             <div class="board-field" data-index="7"></div>
             <div class="board-field" data-index="8"></div>
-        </div>
-        <div class="player-two-score">
-            <h1>Player 2</h1>
-            <h1 class="score">0</h1>
         </div>
     </div>
     <div class="gameActions">

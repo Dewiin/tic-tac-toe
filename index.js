@@ -85,12 +85,18 @@ const playGame = (function() {
             }
 
             if(win[0] == 'X') {
+                playerOne.classList.add("winRound");
+                playerTwo.classList.remove("winRound");
                 playerOne.children[1].textContent++;
             }
             else if(win[0] == 'O') {
+                playerTwo.classList.add("winRound");
+                playerOne.classList.remove("winRound");
                 playerTwo.children[1].textContent++;
             }
             else {
+                playerOne.classList.add("winRound");
+                playerTwo.classList.add("winRound");
                 playerOne.children[1].textContent++;
                 playerTwo.children[1].textContent++;
             }
@@ -122,7 +128,6 @@ const playGame = (function() {
 const playerOne = document.querySelector(".player-one-score");
 const playerTwo = document.querySelector(".player-two-score");
 const boardField = document.querySelectorAll(".board-field");
-playGame.createPlayers("Me", "You");
 boardField.forEach((field, index) => {
     field.addEventListener("click", () => {
         if(playerOne.classList.contains("active")) {
@@ -139,8 +144,11 @@ boardField.forEach((field, index) => {
         }
 
         if(playGame.checkWin()) {
-            playGame.createPlayers("Me", "You");
+            const nameOne = document.querySelector("#name-one").value;
+            const nameTwo = document.querySelector("#name-two").value;
+            playGame.createPlayers(nameOne, nameTwo);
             nextRound.classList.toggle("active");
+
         }       
     });
 });
@@ -154,6 +162,9 @@ restart.addEventListener("click", () => {
     boardField.forEach((field) => {
         field.style.pointerEvents = "auto";
     });
+
+    const modal = document.querySelector(".modal");
+    modal.style.display = "block";
 });
 
 const nextRound = document.querySelector(".gameActions > button:last-child");
@@ -163,4 +174,25 @@ nextRound.addEventListener("click", () => {
     boardField.forEach((field) => {
         field.style.pointerEvents = "auto";
     });
+});
+
+const startGame = document.querySelector(".modal-content > form button:last-child");
+startGame.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const form = document.querySelector(".modal-content > form");
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    const modal = document.querySelector(".modal");
+    modal.style.display = "none";
+
+    const nameOne = document.querySelector("#name-one").value;
+    const nameTwo = document.querySelector("#name-two").value;
+    playGame.createPlayers(nameOne, nameTwo);
+
+    playerOne.classList.remove("winRound");
+    playerTwo.classList.remove("winRound");
 });
