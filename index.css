@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Cute+Font&family=Fontdiner+Swanky&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Press+Start+2P&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+    --font-family: "Press Start 2P", serif;
+    --background-color: rgb(28, 29, 34);
+    --board-color: rgb(47, 50, 58);
+    --board-size: 50vh;
+    --field-shadow: rgb(40, 40, 40);
+    --player-one-font-color: rgb(139, 166, 100);
+    --player-two-font-color: rgb(62, 105, 144);
+}
+
+* {
+    font-family: var(--font-family);
+}
+
+body {
+    background-color: var(--background-color);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 120px;
+}
+
+#game-board {
+    aspect-ratio: 1 / 1;
+    width: var(--board-size);
+    min-width: 350px;
+    /* margin: auto; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.board-field {
+    background-color: var(--board-color);
+    border-radius: 20px;
+    box-shadow: 0 5px 5px var(--field-shadow);
+}
+.board-field:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition-duration: 150ms;
+}
+.board-field:active {
+    transform: scale(0.8);
+    transition-duration: 100ms;
+}
+
+
+/* Player Scores */
+.player-one-score, .player-two-score {
+    text-align: center;
+}
+
+.player-one-score {
+    color: var(--player-one-font-color);
+}
+
+.player-two-score {
+    color: var(--player-two-font-color);
+}
+
+.player-one-score.active, .player-two-score.active {
+    text-shadow: 0 0 50px;
+    transition-duration: 200ms;
+}
